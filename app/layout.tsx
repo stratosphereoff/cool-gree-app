@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
-import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { cn } from "@/lib/utils";
 
+import "./globals.css";
+
+import { cn } from "@/lib/utils";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+
+import { ClerkProvider } from "@clerk/nextjs";
+import ModalProvider from "@/components/providers/modal-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -35,6 +38,7 @@ export default function RootLayout({
             storageKey="gree-theme-dark"
           >
             <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}/>
+            <ModalProvider/>
             {children}
           </ThemeProvider>
         </body>
