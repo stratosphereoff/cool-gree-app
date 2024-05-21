@@ -49,6 +49,7 @@ const ServerHeader = ({
                 )}
                 {isGM && (
                     <DropdownMenuItem
+                    onClick={() => onOpen("editServer", { server })}
                         className="px-3 py-2 text-sm cursor-pointer"
                     >
                         Server Settings
@@ -59,7 +60,7 @@ const ServerHeader = ({
                     <DropdownMenuItem
                         className="px-3 py-2 text-sm cursor-pointer"
                     >
-                        MenageMembers
+                        Menage Members
                         <Users className="h-4 w-4 ml-auto"/>
                     </DropdownMenuItem>
                 )}
