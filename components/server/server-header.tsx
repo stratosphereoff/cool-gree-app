@@ -67,6 +67,7 @@ const ServerHeader = ({
                 )}
                 {isPL && (
                     <DropdownMenuItem
+                        onClick={() => onOpen("createChannel")}
                         className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer"
                     >
                         Create Channel

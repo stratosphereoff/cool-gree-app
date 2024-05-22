@@ -1,10 +1,11 @@
 "use client";
 
-
 import qs from "query-string";
 import { useState } from "react";
 import { Check, Gavel, Loader2, MoreVertical, Shield, ShieldAlert, ShieldCheck, ShieldQuestion } from "lucide-react";
 import axios from "axios";
+import { MemberRole } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 import {
     Dialog,
@@ -15,12 +16,6 @@ import {
 } from "@/components/ui/dialog"
 
 import { useModal } from "@/components/hooks/use-modal-store";
-
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-
-
 import { ServerWithMembersWithProfiles } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserAvatar from "@/components/user-avatar";
@@ -36,8 +31,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
-import { MemberRole } from "@prisma/client";
-import { useRouter } from "next/navigation";
+
 
 
 
