@@ -11,6 +11,7 @@ import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { ClerkProvider } from "@clerk/nextjs";
 import ModalProvider from "@/components/providers/modal-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { SocketProvider } from "@/components/providers/socket-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -38,8 +39,10 @@ export default function RootLayout({
             storageKey="gree-theme-dark"
           >
             <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}/>
-            <ModalProvider/>
-            {children}
+            <SocketProvider>
+              <ModalProvider/>
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
