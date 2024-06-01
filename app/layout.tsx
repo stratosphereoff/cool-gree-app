@@ -12,6 +12,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import ModalProvider from "@/components/providers/modal-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
+import QueryProvider from "@/components/providers/query-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -41,7 +42,9 @@ export default function RootLayout({
             <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}/>
             <SocketProvider>
               <ModalProvider/>
-              {children}
+              <QueryProvider>
+                {children}
+              </QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
