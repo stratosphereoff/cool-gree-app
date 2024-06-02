@@ -15,7 +15,7 @@ type MessageWithMemberWithProfile = Message & {
     }
 }
 
-export const UseChatSocket = ({
+export const useChatSocket = ({
     addKey,
     updateKey,
     queryKey
