@@ -60,7 +60,7 @@ const ChannelIdPage = async ({
                     paramValue={channel.id}
                     type="channel"
             />
-            <div className="flex-1">
+            <div>
                 <ChatInput 
                     name={channel.name}
                     type="channel"
