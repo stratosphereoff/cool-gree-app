@@ -14,7 +14,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import QueryProvider from "@/components/providers/query-provider";
 
-const font = Open_Sans({ subsets: ["latin"] });
+const font = Open_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Gree's Cool Webapp",
