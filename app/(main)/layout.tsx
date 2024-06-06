@@ -1,5 +1,4 @@
 import NavigationSidebar from "@/components/navigation/navigation-sidebar";
-import { ReactNode } from "react";
 
 const MainLayout = async ({
     children

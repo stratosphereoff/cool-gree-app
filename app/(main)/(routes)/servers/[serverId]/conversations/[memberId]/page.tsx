@@ -54,7 +54,8 @@ const MeberIdPage = async ({
 
     return ( 
         <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
-            <ChatHeader 
+            <ChatHeader
+                profileId={otherMember.profileId} 
                 imageUrl={otherMember.profile.imageUrl}
                 name={otherMember.profile.name}
                 serverId={params.serverId}
@@ -83,7 +84,8 @@ const MeberIdPage = async ({
                             type="conversation"
                     />
                     <div>
-                        <ChatInput 
+                        <ChatInput
+                            otherMemberProfile={otherMember.profile} 
                             name={otherMember.profile.name}
                             type="conversation"
                             apiUrl="/api/socket/direct-messages"

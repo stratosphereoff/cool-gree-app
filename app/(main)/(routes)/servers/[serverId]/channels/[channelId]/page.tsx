@@ -65,7 +65,8 @@ const ChannelIdPage = async ({
                         type="channel"
                 />
                     <div>
-                        <ChatInput 
+                        <ChatInput
+                            otherMemberProfile={null}  
                             name={channel.name}
                             type="channel"
                             apiUrl="/api/socket/messages"

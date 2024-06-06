@@ -20,12 +20,27 @@ model Profile {
   imageUrl String @db.Text
   email String @db.Text
 
+  class PlayerClass @default(ADVENTURER)
+  exp Int @default(0)
+  level Int @default(1)
+
+  gold Int @default(0)
+  silver Int @default(0)
+  cooper Int @default(0)
+
   servers Server[]
   members Member[]
   channels Channel[]
 
   createdAt DateTime @default(now()) 
   updatedAt DateTime @updatedAt
+}
+
+enum PlayerClass {
+  ADVENTURER
+  WIZARD
+  KNIGHT
+  CONJURER
 }
 
 model Server {

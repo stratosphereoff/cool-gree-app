@@ -18,10 +18,13 @@ import { Input } from "@/components/ui/input";
 import { Plus } from "lucide-react";
 import { useModal } from "@/components/hooks/use-modal-store";
 import EmojiPicker from "@/components/emoji-picker";
+import { cn } from "@/lib/utils";
+import { Profile } from "@prisma/client";
 
 interface ChatInputProps {
     apiUrl: string;
     query: Record<string, any>;
+    otherMemberProfile: Profile | null;
     name: string;
     type: "conversation" | "channel";
 }
@@ -33,6 +36,7 @@ const formSchema = z.object({
 const ChatInput = ({
     apiUrl,
     query,
+    otherMemberProfile,
     name,
     type
 }: ChatInputProps) => {
@@ -48,12 +52,39 @@ const ChatInput = ({
 
     const isLoading = form.formState.isSubmitting;
 
+    const giveGold = async (otherProfileId : string, otherProfileGold : number) => {
+        try {
+            const url = qs.stringifyUrl({
+                url: `/api/profiles/${otherProfileId}`,
+            });
+
+            let profileGold = otherProfileGold;
+
+            const response = await axios.patch(url, { otherProfileId, profileGold });
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             const url = qs.stringifyUrl({
                 url: apiUrl,
                 query,
             });
+
+            if(type === "conversation" && values.content === "!gold"){
+                if(!otherMemberProfile) return;
+
+                const otherProfileId = otherMemberProfile.id;
+                let otherProfileGold = otherMemberProfile.gold;
+                giveGold(otherProfileId, otherProfileGold);
+                
+                form.reset();
+                router.refresh();
+                return;
+            }
 
             await axios.post(url, values);
 
@@ -83,13 +114,15 @@ const ChatInput = ({
                                     >
                                         <Plus className="text-white dark:text-[#313338]" />
                                     </button>
-                                    <Input
-                                        disabled={isLoading}
-                                        className="px-14 py-6 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0
-                                        focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200"
-                                        placeholder={`Message ${type === "conversation" ? name : "#" + name}`}
-                                        {...field}
-                                    />
+                                        <Input
+                                            disabled={isLoading}
+                                            className={cn(
+                                                "px-14 py-6 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200",
+                                                field.value[0] === "!" && "px-14 py-6 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-emerald-500 dark:text-emerald-400"
+                                            )}
+                                            placeholder={`Message ${type === "conversation" ? name : "#" + name}`}
+                                            {...field}
+                                        />
                                     <div className="absolute top-7 right-8">
                                         <EmojiPicker 
                                             onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}

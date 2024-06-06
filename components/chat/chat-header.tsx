@@ -1,12 +1,14 @@
 import { Hash } from "lucide-react";
 
 import { MobileToggle } from "@/components/mobile-toggle";
-import UserAvatar from "@/components/user-avatar";
 import { SocketIndicator } from "@/components/socket-indicator";
 import { ChatVideoButton } from "./chat-video-button";
+import ProfilePageMini from "@/components/profile-page-mini";
+import { ChatProfileLinkButton } from "./chat-profile-link-button";
 
 interface ChatHeaderProps {
   serverId: string;
+  profileId: string;
   name: string;
   type: "channel" | "conversation";
   imageUrl?: string;
@@ -14,6 +16,7 @@ interface ChatHeaderProps {
 
 export const ChatHeader = ({
   serverId,
+  profileId,
   name,
   type,
   imageUrl,
@@ -25,10 +28,7 @@ export const ChatHeader = ({
         <Hash className="w-5 h-5 text-zinc-500 dark:text-zinc-400 mr-2" />
       )}
       { type === "conversation" && (
-        <UserAvatar 
-          src={imageUrl}
-          className="h-8 w-8 md:h-8 md:w-8 mr-2"
-        />
+        <ProfilePageMini imageUrl={imageUrl} />
       )}
       <p className="font-semibold text-md text-black dark:text-white">
         {name}
@@ -36,6 +36,9 @@ export const ChatHeader = ({
       <div className="ml-auto flex items-center"> 
         {type === "conversation" && (
           <ChatVideoButton />
+        )}
+        {type === "conversation" && (
+        <ChatProfileLinkButton profileId={profileId} />
         )}
         <SocketIndicator />
       </div>

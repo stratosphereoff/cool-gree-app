@@ -149,6 +149,9 @@ const ChatItem = ({
                         <span className="text-xs text-zinc-500 dark:text-zinc-400">
                             {timeStamp}
                         </span>
+                        {/* <div className="text-xs text-zinc-500 dark:text-zinc-400">
+                            Gold: {member.profile.gold}
+                        </div> */}
                     </div>
                     {isImage && (
                         <a 

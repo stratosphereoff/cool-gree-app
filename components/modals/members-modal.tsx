@@ -32,9 +32,6 @@ import {
     DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 
-
-
-
 const roleIconMap = {
     "ADVENTURER": null,
     "PARTYLEADER": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500"/>,

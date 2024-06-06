@@ -10,11 +10,11 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ModeToggle } from "@/components/mode-toggle";
 
-
+import Bank from "@/components/bank";
+import { MyProfile } from "../my-profile-button";
 
 const NavigationSidebar = async () => {
     const profile = await currentProfile();
-
     if(!profile) redirect("/");
 
     const servers = db.server.findMany({
@@ -26,7 +26,6 @@ const NavigationSidebar = async () => {
             }
         }
     });
-    
     return ( 
     <div
         className="space-y-4 flex flex-col items-center h-full text-primary w-full bg-[#E3E5E8] dark:bg-[#1E1F22] py-3"
@@ -49,6 +48,7 @@ const NavigationSidebar = async () => {
         </ScrollArea>
         <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
             <ModeToggle/>
+            <MyProfile profileId={profile.id}/>
             <UserButton
                 afterSignOutUrl="/"
                 appearance={{
@@ -56,7 +56,9 @@ const NavigationSidebar = async () => {
                         avatarBox: "h-[48px] w-[48px]"
                     }
                 }}
-
+            />
+            <Bank
+                profile={profile}
             />
         </div>
     </div> 
