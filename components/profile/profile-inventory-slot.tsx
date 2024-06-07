@@ -17,8 +17,11 @@ const ProfileInventorySlot = ({
 }: ProfileInventorySlotProps) => {
   const isSlotEmpty = true;
 
-  const hasItemStyle = `flex bg-[#2f271d80]/25 col-span-[${slotW}] row-span-[${slotH}] border border-[#f6ae5580] shadow-[inset_0px_0px_3px_1px_#fbd38d]`;
-  const emptyStyle = `bg-black col-span-[${slotW}] row-span-[${slotH}] border-0 shadow-none`;
+  const colSpan = `col-span-${slotW}`;
+  const rowSpan = `row-span-${slotH}`;
+
+  const hasItemStyle = `flex bg-[#2f271d80]/25 ${colSpan} ${rowSpan} border border-[#f6ae5580] shadow-[inset_0px_0px_3px_1px_#fbd38d]`;
+  const emptyStyle = `bg-black ${colSpan} ${rowSpan} border-0 shadow-none`;
 
   return (
     <div className={cn(hasItemStyle, isSlotEmpty && emptyStyle)}
