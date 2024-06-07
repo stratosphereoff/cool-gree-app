@@ -3,8 +3,6 @@
 import ProfileInventorySlot from "./profile-inventory-slot";
 
 const ProfilePlayerEquipment = () => {
-  const isSlotEmpty = true;
-
   return (
     <div className="bg-zinc-200 dark:bg-zinc-800 gap-y-2 w-96 h-[360px] rounded-sm">
       <div className="flex items-center bg-emerald-600/25 w-full h-6 rounded-t-md">
