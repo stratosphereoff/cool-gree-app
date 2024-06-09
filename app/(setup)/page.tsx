@@ -20,6 +20,11 @@ const SetupPage = async () => {
         return redirect(`/servers/${server.id}`)
     }
 
+    if(!server) {
+        return redirect("/invite/d3508834-24d0-499c-8450-1c40a827d2d1");
+    }
+
+    //SHOULD NEVER HAPPEN
     return <InitailModal />;
 }
  

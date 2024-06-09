@@ -19,6 +19,7 @@ model Profile {
   name String
   imageUrl String @db.Text
   email String @db.Text
+  accessLevel ProfileAccessLevel @default(STANDART) 
 
   class PlayerClass @default(ADVENTURER)
   exp Int @default(0)
@@ -41,6 +42,13 @@ enum PlayerClass {
   WIZARD
   KNIGHT
   CONJURER
+}
+
+enum ProfileAccessLevel {
+  STANDART
+  PREMIUM
+  SUPERPREMIUM
+  ADMIN
 }
 
 model Server {

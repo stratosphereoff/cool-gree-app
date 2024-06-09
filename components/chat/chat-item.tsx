@@ -127,8 +127,17 @@ const ChatItem = ({
     const isPDF = fileType === "pdf" && fileUrl;
     const isImage = !isPDF && fileUrl;
 
-    return ( 
+    let isCommand = false;
+
+    if(content === "@fart")
+    {
+        isCommand = true;
+    }
+
+
+    return (
         <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
+            {!isCommand ? <>
             <div className="gruop flex gap-x-2 items-start w-full"> 
                 <div 
                     onClick={onMemberClick}
@@ -253,6 +262,12 @@ const ChatItem = ({
                     </ActionTooltip>
                 </div>
             )}
+            </> :
+            <div>
+                <p className="italic text-zinc-500 dark:text-zinc-500 text-xs mt-1">
+                    {member.profile.name} пёрнул и обосрался.
+                </p>
+            </div>}
         </div>
      );
 }
