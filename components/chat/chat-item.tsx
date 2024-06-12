@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Member, MemberRole, Profile } from "@prisma/client";
 import UserAvatar from "@/components/user-avatar";
 import ActionTooltip from "@/components/action-tooltip";
-import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
+import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash, Wand } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -33,7 +33,9 @@ interface ChatItemProps {
     timeStamp: string;
     fileUrl: string | null;
     deleted: boolean;
-    currentMember: Member;
+    currentMember: Member & {
+        profile: Profile;
+    };
     isUpdated: boolean;
     socketUrl: string;
     socketQuery: Record<string,string>;
@@ -134,7 +136,6 @@ const ChatItem = ({
         isCommand = true;
     }
 
-
     return (
         <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
             {!isCommand ? <>
@@ -158,9 +159,6 @@ const ChatItem = ({
                         <span className="text-xs text-zinc-500 dark:text-zinc-400">
                             {timeStamp}
                         </span>
-                        {/* <div className="text-xs text-zinc-500 dark:text-zinc-400">
-                            Gold: {member.profile.gold}
-                        </div> */}
                     </div>
                     {isImage && (
                         <a 
@@ -256,6 +254,21 @@ const ChatItem = ({
                             onClick={() => onOpen("deleteMessage", { 
                                 apiUrl: `${socketUrl}/${id}`,
                                 query: socketQuery
+                            })}
+                            className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+                        />
+                    </ActionTooltip>
+                </div>
+            )}
+            {!isOwner && (
+                <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-[300px] bg-white dark:bg-zinc-800 border rounded-sm">
+                    <ActionTooltip label="Give gold">
+                        <Wand
+                            onClick={() => onOpen("userChatAction", { 
+                                apiUrl: `${socketUrl}/${id}`,
+                                query: socketQuery,
+                                profile: member.profile,
+                                currentMemberProfile: currentMember.profile,
                             })}
                             className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
                         />

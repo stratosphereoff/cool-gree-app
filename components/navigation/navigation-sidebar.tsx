@@ -12,9 +12,12 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 import Bank from "@/components/bank";
 import { MyProfile } from "../my-profile-button";
+import { currentUser } from "@clerk/nextjs/server";
 
 const NavigationSidebar = async () => {
     const profile = await currentProfile();
+    const user = await currentUser();
+
     if(!profile) redirect("/");
 
     const servers = db.server.findMany({
@@ -26,6 +29,7 @@ const NavigationSidebar = async () => {
             }
         }
     });
+
     return ( 
     <div
         className="space-y-4 flex flex-col items-center h-full text-primary w-full bg-[#E3E5E8] dark:bg-[#1E1F22] py-3"

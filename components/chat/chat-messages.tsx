@@ -20,7 +20,9 @@ type MessageWithMemberWithProfile = Message & {
 
 interface ChatMessagesProps {
     name: string;
-    member: Member;
+    member: Member & {
+        profile: Profile
+    };
     chatId: string;
     apiUrl: string;
     socketUrl: string;

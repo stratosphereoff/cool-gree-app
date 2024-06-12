@@ -11,14 +11,13 @@ export async function PATCH(
         }
 
         const { profileGold } = await req.json();
-        let goldIncrement = profileGold + 1;
 
         const profile = await db.profile.update({
             where: {
                 id: params.profileId,
             },
             data: {
-                gold: goldIncrement,
+                gold: profileGold,
             }
         });
 

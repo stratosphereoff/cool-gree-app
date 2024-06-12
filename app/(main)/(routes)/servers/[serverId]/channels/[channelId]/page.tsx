@@ -34,14 +34,15 @@ const ChannelIdPage = async ({
         where: {
             serverId: params.serverId,
             profileId: profile.id,
+        },
+        include: {
+            profile: true,
         }
     });
 
     if(!channel || !member){
         redirect("/");
     }
-
-
   
     return (
         <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
